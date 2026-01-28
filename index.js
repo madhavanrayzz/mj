@@ -1,10 +1,9 @@
 export async function onRequest({ request }) {
-  console.log({
-    method: request.method,
-    url: request.url,
-    headers: Object.fromEntries(request.headers),
-    time: new Date().toISOString()
-  });
+  const url = new URL(request.url);
+  const id = url.searchParams.get("id") || "none";
 
-  return new Response("OK", { status: 200 });
+  return new Response(
+    `HIT OK | id=${id} | time=${new Date().toISOString()}`,
+    { status: 200 }
+  );
 }
